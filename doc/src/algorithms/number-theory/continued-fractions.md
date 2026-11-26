@@ -141,13 +141,78 @@ that $0$ or the smallest integer in the interval is the answer.
 
 ## Farey neighbours {#farey}
 
-Two fractions $a/b < c/d$ with $bc - ad = 1$ are adjacent in every Farey
-sequence of order $Q$ with $\max(b, d) \le Q < b + d$. Given $x = p/q$
-and $Q \ge q$, the left neighbour $p_l/q_l$ is therefore determined by $p
-q_l \equiv 1 \pmod q$ and $Q - q < q_l \le Q$, which `fmpq_farey_neighbors`
-solves with one modular inverse; the right neighbour follows from the
-mediant relation $p_l/q_l + p_r/q_r = v \cdot p/q$ with $v = \lfloor (Q +
-q_l)/q \rfloor$ [@HarWri2008, Chapter III].
+For an integer $Q \ge 1$, order all reduced fractions with positive
+denominator at most $Q$ by value. Restricting to $[0,1]$ gives the usual
+Farey sequence; `fmpq_farey_neighbors` uses its extension to all of
+$\Q$. Cauchy [@Cau1887, pp. 146-148] proves the determinant-one property
+of neighbours and deduces their mediant relation; see also
+[@HarWri2008, Chapter III].
+
+::: lemma Denominator gap {#lem-farey-gap}
+Let $a/b < c/d$, with $b,d>0$ and $bc-ad=1$. Every fraction $u/w$
+strictly between them, with integers $u,w$ and $w>0$, has $w \ge b+d$.
+Consequently $a/b$ and $c/d$ are neighbours of order $Q$ whenever
+$\max(b,d) \le Q < b+d$.
+:::
+
+::: proof
+The integers $\lambda=cw-du$ and $\mu=bu-aw$ are positive, and
+$w=b\lambda+d\mu$ since $bc-ad=1$. Hence $w \ge b+d$.
+:::
+
+::: proposition Neighbours of a given rational {#prop-farey-neighbours}
+Let $x=p/q$ be reduced, with $q>1$ and $Q \ge q$. Choose the unique
+integer $q_l$ satisfying
+$$
+p q_l \equiv 1 \pmod q, \qquad Q-q < q_l \le Q,
+$$
+and set
+$$
+p_l=\frac{p q_l-1}{q}, \qquad
+v=\left\lfloor\frac{Q+q_l}{q}\right\rfloor, \qquad
+q_r=vq-q_l, \qquad p_r=vp-p_l.
+$$
+Then $p_l/q_l < p/q < p_r/q_r$ are consecutive in the extended Farey
+order of $Q$, and
+$$
+p_l+p_r=vp, \qquad q_l+q_r=vq.
+$$
+:::
+
+::: proof
+Since $\gcd(p,q)=1$, the congruence determines one residue class modulo
+$q$, and the interval $(Q-q,Q]$ contains exactly one representative.
+It is positive, and $p_l$ is an integer. The definition of $v$ gives
+$Q-q<q_r \le Q$, so $q_r$ is also positive. The formulas give
+$$
+p q_l-p_l q=1, \qquad p_r q-p q_r=1.
+$$
+Thus both neighbours are reduced and strictly bracket $p/q$. Since
+$q_l+q>Q$ and $q+q_r>Q$, [](#lem-farey-gap) excludes every fraction of
+denominator at most $Q$ from either intervening interval. The last
+two identities follow directly from the definitions of $p_r$ and $q_r$.
+:::
+
+In particular, the middle fraction is the mediant of its neighbours:
+$$
+\frac{p_l+p_r}{q_l+q_r}=\frac pq.
+$$
+The construction uses one modular inverse to obtain $q_l$ and exact
+integer arithmetic for the remaining quantities.
+
+For example, let $x=2/5$ and $Q=7$. The inverse of $2$ modulo $5$ is
+$3$, and $2<q_l \le 7$ selects $q_l=3$. Then $p_l=1$ and $v=2$,
+giving $q_r=7$ and $p_r=3$. Hence the neighbours are
+$$
+\frac13 < \frac25 < \frac37, \qquad
+\frac{1+3}{3+7}=\frac{4}{10}=\frac25.
+$$
+Here $p_l+p_r=4=2p$ and $q_l+q_r=10=2q$. The ordinary sum of the
+neighbours is $1/3+3/7=16/21$, while $v(p/q)=4/5$.
+
+For an integer input $x=p$ ($q=1$), the neighbours are
+$(pQ-1)/Q$ and $(pQ+1)/Q$. These fractions are reduced, and
+[](#lem-farey-gap) proves adjacency since $Q+1>Q$.
 
 ## Dedekind sums {#dedekind}
 

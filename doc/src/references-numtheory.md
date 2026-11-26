@@ -1,5 +1,6 @@
 [CalkinWilf2000]: N. Calkin and H. S. Wilf, "Recounting the rationals", American Mathematical Monthly 107:4 (2000), 360–363. https://doi.org/10.2307/2589182
 [HarWri2008]: G. H. Hardy and E. M. Wright, *An Introduction to the Theory of Numbers*, sixth edition, revised by D. R. Heath-Brown and J. H. Silverman, Oxford University Press, 2008.
+[Cau1887]: A.-L. Cauchy, "Démonstration d'un théorème curieux sur les nombres", *Œuvres complètes*, deuxième série, tome VI, Gauthier-Villars, 1887, 146–148. https://doi.org/10.1017/CBO9780511702655.013
 [RadGro1972]: H. Rademacher and E. Grosswald, *Dedekind Sums*, Carus Mathematical Monographs 16, Mathematical Association of America, 1972.
 [Hickerson1977]: D. Hickerson, "Continued fractions and density results for Dedekind sums", Journal für die reine und angewandte Mathematik 290 (1977), 113–116.
 [CollinsEncarnacion1995]: G. E. Collins and M. J. Encarnación, "Efficient rational number reconstruction", Journal of Symbolic Computation 20:3 (1995), 287–297. https://doi.org/10.1006/jsco.1995.1051
